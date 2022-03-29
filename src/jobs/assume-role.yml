@@ -1,0 +1,17 @@
+description: >
+  Authenticate with AWS using OIDC and assume a role.
+
+executor: default
+
+parameters:
+  role-arn:
+    type: string
+    description: "The Amazon Resource Name (ARN) of the role that the caller is assuming."
+  duration-second:
+    type: integer
+    default: 900
+    description: "The duration, in seconds, of the role session"
+steps:
+  - assume-role:
+      role-arn: << parameters.role-arn >>
+      duration-second: << parameters.duration-second >>

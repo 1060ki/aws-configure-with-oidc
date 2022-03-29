@@ -1,0 +1,20 @@
+description: >
+  Authenticate with AWS using OIDC and assume a role.
+
+parameters:
+  role-arn:
+    type: string
+    description: "The Amazon Resource Name (ARN) of the role that the caller is assuming."
+  duration-second:
+    type: integer
+    default: 900
+    description: "The duration, in seconds, of the role session"
+
+steps:
+  - aws-cli/install
+  - run:
+      environment:
+        PARAM_ROLE_ARN: <<parameters.role-arn>>
+        PARAM_DURATION_SECOND: <<parameters.duration-second>>
+      name: Configure aws credential
+      command: <<include(scripts/assume_role.sh)>>
