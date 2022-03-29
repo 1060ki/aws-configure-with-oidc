@@ -3,8 +3,9 @@ description: >
 
 parameters:
   role-arn:
-    type: string
-    description: "The Amazon Resource Name (ARN) of the role that the caller is assuming."
+    type: env_var_name
+    default: AWS_IAM_ROLE_ARN
+    description: "The Amazon Resource Name (ARN) of the role that the caller is assuming"
   duration-second:
     type: integer
     default: 900
