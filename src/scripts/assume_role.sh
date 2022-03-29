@@ -1,6 +1,5 @@
 PARAM_ROLE_ARN=$(eval echo "\$$PARAM_ROLE_ARN")
 
-echo "$PARAM_ROLE_ARN"
 # SEE: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sts/assume-role-with-web-identity.html
 credentials=$(aws sts assume-role-with-web-identity \
   --role-arn "${PARAM_ROLE_ARN}" \
