@@ -1,0 +1,27 @@
+description: Configure AWS Credentials using OIDC
+usage:
+  version: 2.1
+  orbs:
+    aws-cli: circleci/aws-cli@2.1.0
+    aws-configure-with-oidc: l060ki/aws-configure-with-oidc@0.1.2
+
+  jobs:
+    build:
+      docker:
+        - image: cimg/python:3.10
+      environment:
+        AWS_REGION: ap-northeast-1
+      steps:
+        - aws-configure-with-oidc/assume-role:
+            role-arn: AWS_IAM_ROLE_ARN
+        - run:
+            name:
+            command: |
+              aws sts get-caller-identity
+
+  workflows:
+    build-and-test:
+      jobs:
+        - build:
+            context:
+              - aws-oidc-deploy
