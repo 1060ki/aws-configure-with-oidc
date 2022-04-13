@@ -4,7 +4,7 @@ PARAM_ROLE_ARN=$(eval echo "\$$PARAM_ROLE_ARN")
 credentials=$(aws sts assume-role-with-web-identity \
   --role-arn "${PARAM_ROLE_ARN}" \
   --web-identity-token "${CIRCLE_OIDC_TOKEN}" \
-  --role-session-name "CircleCI" \
+  --role-session-name "${PARAM_ROLE_SESSION_NAME}" \
   --duration-seconds "${PARAM_DURATION_SECOND}" \
   --query "Credentials" \
   --output "json")

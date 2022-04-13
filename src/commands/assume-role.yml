@@ -10,6 +10,10 @@ parameters:
     type: integer
     default: 900
     description: "The duration, in seconds, of the role session"
+  role-session-name:
+    type: string
+    default: "CIrcleCI"
+    description: "An identifier for the assumed role session"
 
 steps:
   - aws-cli/install
@@ -17,5 +21,6 @@ steps:
       environment:
         PARAM_ROLE_ARN: <<parameters.role-arn>>
         PARAM_DURATION_SECOND: <<parameters.duration-second>>
+        PARAM_ROLE_SESSION_NAME: <<parameters.role-session-name>>
       name: Configure aws credential
       command: <<include(scripts/assume_role.sh)>>
